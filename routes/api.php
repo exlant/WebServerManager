@@ -1,6 +1,5 @@
 <?php
-
-use Illuminate\Http\Request;
+declare(strict_types=1);
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +12,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::options('{catchAll}', ['uses' => 'ApiController@options'])->where('catchAll', '(.*)');
+
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('v1/sign-up', ['uses' => 'AuthController@register']);
+    Route::get('v1/sign-in', ['uses' => 'Api\AuthController@login']);
+    /*Route::post('v1/password/change', [
+        'uses' => 'AuthController@passwordChange',
+        'middleware' => 'jwt.auth',
+    ]);*/
+    Route::post('v1/password/reset', ['uses' => 'AuthController@passwordReset']);
+    Route::post('v1/refresh-token', ['uses' => 'AuthController@refreshToken']);
 });
