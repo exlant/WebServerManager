@@ -7,7 +7,8 @@ use Throwable;
 
 /**
  * Class Logger
- * @package MDR\Components\Helpers
+ *
+ * @package App\Core\Helpers
  */
 class Logger
 {
